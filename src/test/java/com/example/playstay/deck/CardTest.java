@@ -2,6 +2,7 @@ package com.example.playstay.deck;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
@@ -36,5 +37,14 @@ public class CardTest {
         Card card = new Card(Suit.CLUB, 6 );
         Card otherCard = new Card(Suit.CLUB, 1 );
         assertEquals(Integer.compare(card.getNumber(), otherCard.getNumber()), card.compareTo(otherCard));
+    }
+    
+    @Test
+    public void Cardクラス以外と比較してもfalseであること(){
+        Card card = new Card(Suit.CLUB, 2);
+        // そのまま文字列を引数に渡すとコンパイル時にinfoが出てくるので一旦Objectに代入
+        Object obj  = "hogehoge";
+        assertFalse(()->card.equals(obj));
+        assertFalse(()->card.equals(null));
     }
 }
