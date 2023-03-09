@@ -10,11 +10,18 @@ public class Deck {
     private List<Card> deck;
     int index;
 
-    public Deck(){
+    /**
+     * デッキを作成。このメソッドを使った場合シャッフルされる。
+     */
+    public Deck() {
         this(true);
     }
-    
-    public Deck(boolean shuffle){
+
+    /**
+     * デッキを作成。シャッフルするかは引数で来まる
+     * @param shuffle シャッフルする場合はtrue,そうでなければfalse
+     */
+    public Deck(boolean shuffle) {
         createDeck(shuffle);
     }
 
@@ -23,9 +30,9 @@ public class Deck {
      */
     private void createDeck(boolean shuffle) {
         resetDeck();
-        if(shuffle){
+        if (shuffle) {
             Collections.shuffle(deck);
-        }else{
+        } else {
             Collections.sort(deck);
         }
     }
@@ -33,10 +40,12 @@ public class Deck {
     /**
      * 
      */
-    public void resetDeck() {
-        deck = Arrays.stream(Suit.values())
-                .flatMap(s -> IntStream.range(1, 14).mapToObj(i -> new Card(s, i)))
-                .collect(Collectors.toList());
+    private void resetDeck() {
+        if (deck == null) {
+            deck = Arrays.stream(Suit.values())
+                    .flatMap(s -> IntStream.range(1, 14).mapToObj(i -> new Card(s, i)))
+                    .collect(Collectors.toList());
+        }
         index = 0;
     }
 
