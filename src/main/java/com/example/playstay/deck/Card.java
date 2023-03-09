@@ -39,6 +39,7 @@ public class Card implements Comparable<Card> {
         }
 
         Card card = (Card) obj;
+        // Suitはenumなので==で比較しても正しく比較可能
         return (getSuit() == card.getSuit()) && (getNumber() == card.getNumber());
     }
 
